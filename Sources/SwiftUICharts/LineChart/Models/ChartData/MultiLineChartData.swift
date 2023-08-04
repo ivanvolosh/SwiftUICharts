@@ -176,7 +176,7 @@ extension MultiLineChartData {
     public func getPointLocation(dataSet: LineDataSet, touchLocation: CGPoint, chartSize: CGRect) -> CGPoint? {
         let minValue: Double = self.minValue
         let range: Double = self.range
-        let xSection: CGFloat = chartSize.width / CGFloat(dataSet.dataPoints.count - 1)
+        let xSection: CGFloat = (chartSize.width / CGFloat(dataSet.dataPoints.count - 1)) + ((self.xAxisSpacing ?? 0) * CGFloat(dataSet.dataPoints.count - 1))
         let ySection: CGFloat = chartSize.height / CGFloat(range)
         let index: Int = Int((touchLocation.x + (xSection / 2)) / xSection)
         
@@ -196,7 +196,7 @@ extension MultiLineChartData {
     
     public func getDataPoint(touchLocation: CGPoint, chartSize: CGRect) {
         self.infoView.touchOverlayInfo = dataSets.dataSets.indices.compactMap { setIndex in
-            let xSection: CGFloat = chartSize.width / CGFloat(dataSets.dataSets[setIndex].dataPoints.count - 1)
+            let xSection: CGFloat = chartSize.width / CGFloat(dataSets.dataSets[setIndex].dataPoints.count - 1) + ((self.xAxisSpacing ?? 0) * CGFloat(dataSets.dataSets[setIndex].dataPoints.count - 1))
             let index = Int((touchLocation.x + (xSection / 2)) / xSection)
             if index >= 0 && index < dataSets.dataSets[setIndex].dataPoints.count {
                 if let data = self.extraLineData,
