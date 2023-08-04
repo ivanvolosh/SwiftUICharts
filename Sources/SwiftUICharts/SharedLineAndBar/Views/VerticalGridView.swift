@@ -27,7 +27,7 @@ internal struct VerticalGridView<T>: View where T: CTLineBarChartDataProtocol {
                     style: StrokeStyle(lineWidth: chartData.chartStyle.xAxisGridStyle.lineWidth,
                                        dash: chartData.chartStyle.xAxisGridStyle.dash,
                                        dashPhase: chartData.chartStyle.xAxisGridStyle.dashPhase))
-            .frame(width: chartData.chartStyle.xAxisGridStyle.lineWidth)
+            .frame(width: chartData.chartStyle.xAxisGridStyle.lineWidth + 20)
             .animateOnAppear(disabled: chartData.disableAnimation, using: chartData.chartStyle.globalAnimation) {
                 self.startAnimation = true
             }
