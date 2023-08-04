@@ -53,7 +53,7 @@ public final class MultiLineChartData: CTLineChartDataProtocol, GetDataProtocol,
         dataSets: MultiLineDataSet,
         metadata: ChartMetadata = ChartMetadata(),
         xAxisLabels: [String]? = nil,
-        xAxisPadding: CGFloat? = nil,
+        xAxisSpacing: CGFloat? = nil,
         yAxisLabels: [String]? = nil,
         chartStyle: LineChartStyle = LineChartStyle(),
         noDataText: Text = Text("No Data")
@@ -61,7 +61,7 @@ public final class MultiLineChartData: CTLineChartDataProtocol, GetDataProtocol,
         self.dataSets = dataSets
         self.metadata = metadata
         self.xAxisLabels = xAxisLabels
-        self.xAxisSpacing = xAxisPadding
+        self.xAxisSpacing = xAxisSpacing
         self.yAxisLabels = yAxisLabels
         self.chartStyle = chartStyle
         self.noDataText = noDataText
