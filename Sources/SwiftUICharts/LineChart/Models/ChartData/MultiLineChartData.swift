@@ -22,6 +22,7 @@ public final class MultiLineChartData: CTLineChartDataProtocol, GetDataProtocol,
     @Published public final var metadata: ChartMetadata
     @Published public final var xAxisLabels: [String]?
     @Published public final var yAxisLabels: [String]?
+    @Published public final var xAxisSpacing: CGFloat?
     @Published public final var chartStyle: LineChartStyle
     @Published public final var legends: [LegendData]
     @Published public final var viewData: ChartViewData
@@ -52,6 +53,7 @@ public final class MultiLineChartData: CTLineChartDataProtocol, GetDataProtocol,
         dataSets: MultiLineDataSet,
         metadata: ChartMetadata = ChartMetadata(),
         xAxisLabels: [String]? = nil,
+        xAxisPadding: CGFloat? = nil,
         yAxisLabels: [String]? = nil,
         chartStyle: LineChartStyle = LineChartStyle(),
         noDataText: Text = Text("No Data")
@@ -59,6 +61,7 @@ public final class MultiLineChartData: CTLineChartDataProtocol, GetDataProtocol,
         self.dataSets = dataSets
         self.metadata = metadata
         self.xAxisLabels = xAxisLabels
+        self.xAxisSpacing = xAxisPadding
         self.yAxisLabels = yAxisLabels
         self.chartStyle = chartStyle
         self.noDataText = noDataText
@@ -74,7 +77,7 @@ public final class MultiLineChartData: CTLineChartDataProtocol, GetDataProtocol,
             switch self.chartStyle.xAxisLabelsFrom {
             case .dataPoint(let angle):
                 
-                HStack(spacing: 0) {
+                HStack(spacing: self.xAxisSpacing) {
                     ForEach(dataSets.dataSets[0].dataPoints) { data in
                         VStack {
                             if self.chartStyle.xAxisLabelPosition == .bottom {
@@ -96,7 +99,7 @@ public final class MultiLineChartData: CTLineChartDataProtocol, GetDataProtocol,
                 
             case .chartData(let angle):
                 if let labelArray = self.xAxisLabels {
-                    HStack(spacing: 0) {
+                    HStack(spacing: self.xAxisSpacing) {
                         ForEach(labelArray.indices, id: \.self) { i in
                             VStack {
                                 if self.chartStyle.xAxisLabelPosition == .bottom {
