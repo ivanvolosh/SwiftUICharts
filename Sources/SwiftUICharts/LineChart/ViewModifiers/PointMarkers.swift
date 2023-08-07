@@ -24,7 +24,7 @@ internal struct PointMarkers<T>: ViewModifier where T: CTLineChartDataProtocol &
                 chartData.getPointMarker()
             } else { content }
         }
-        .padding(.top,-20) //MARK: Change if needed 
+//        .padding(.top,-20) //MARK: Change if needed
     }
 }
 

@@ -273,11 +273,11 @@ extension Path {
         var path = Path()
         
         if dataPoints.count >= 2 {
-            
+            // THe 0.974 is needed to fix the padding i've added on the labels
             findFirst: for index in 0 ..< dataPoints.count {
                 if dataPoints[index].value != 0 {
                     let firstPoint = CGPoint(x: CGFloat(index) * x,
-                                             y: (CGFloat(dataPoints[index].value - minValue) * -y) + rect.height)
+                                             y: (CGFloat(dataPoints[index].value - minValue) * (-y * 0.974)) + rect.height )
                     path.move(to: firstPoint)
                     break findFirst
                 }
@@ -285,7 +285,7 @@ extension Path {
             
             for index in 1 ..< dataPoints.count {
                 let nextPoint = CGPoint(x: CGFloat(index) * x,
-                                        y: (CGFloat(dataPoints[index].value - minValue) * -y) + rect.height)
+                                        y: (CGFloat(dataPoints[index].value - minValue ) * (-y * 0.974 )) + rect.height)
                 
                 if dataPoints[index].value != 0 && !dataPoints[index].ignoreMe {
                     path.addLine(to: nextPoint)

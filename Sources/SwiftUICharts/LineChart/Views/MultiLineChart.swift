@@ -67,7 +67,7 @@ public struct MultiLineChart<ChartData>: View where ChartData: MultiLineChartDat
                     ForEach(chartData.dataSets.dataSets, id: \.id) { dataSet in
                         MultiLineChartCell(chartData: chartData, dataSet: dataSet, minValue: minValue, range: range)
                     }
-                    .padding(.top,-20) //MARK: Change if needed 
+                    .padding(.top,-20) //MARK: Change if needed
                 }
                 // Needed for axes label frames
                 .onAppear {
