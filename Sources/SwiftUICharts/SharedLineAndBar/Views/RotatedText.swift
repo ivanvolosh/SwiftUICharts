@@ -50,7 +50,6 @@ internal struct RotatedText<ChartData>: View where ChartData: CTLineBarChartData
             .font(chartData.chartStyle.xAxisLabelFont)
             .foregroundColor(chartData.chartStyle.xAxisLabelColour)
             .lineLimit(1)
-            .padding(.leading,10)
             .overlay(
                 GeometryReader { geo in
                     Color.clear

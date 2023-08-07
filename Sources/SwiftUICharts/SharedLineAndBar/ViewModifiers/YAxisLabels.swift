@@ -16,17 +16,24 @@ internal struct YAxisLabels<T>: ViewModifier where T: CTLineBarChartDataProtocol
     private let specifier: String
     private let colourIndicator: AxisColour
     private let formatter: NumberFormatter?
+    private let trailingPadding: CGFloat
+    private let bottomPadding: CGFloat
     
     internal init(
         chartData: T,
         specifier: String,
         formatter: NumberFormatter?,
-        colourIndicator: AxisColour
+        colourIndicator: AxisColour,
+        trailingPadding: CGFloat,
+        bottomPadding: CGFloat
+
     ) {
         self.chartData = chartData
         self.specifier = specifier
         self.colourIndicator = colourIndicator
         self.formatter = formatter
+        self.trailingPadding = trailingPadding
+        self.bottomPadding = bottomPadding
     }
     
     internal func body(content: Content) -> some View {
@@ -36,7 +43,10 @@ internal struct YAxisLabels<T>: ViewModifier where T: CTLineBarChartDataProtocol
                 case .leading:
                     HStack(spacing: 0) {
                         chartData.getYAxisTitle(colour: colourIndicator)
-                        chartData.getYAxisLabels().padding(.trailing, 4)
+                        chartData.getYAxisLabels()
+                            .padding(.trailing, self.trailingPadding)
+                            .padding(.bottom,bottomPadding)
+                        
                         content
                     }
                 case .trailing:
@@ -88,8 +98,10 @@ extension View {
         chartData: T,
         specifier: String = "%.0f",
         formatter: NumberFormatter? = nil,
-        colourIndicator: AxisColour = .none
+        colourIndicator: AxisColour = .none,
+        trailingPadding: CGFloat = 4,
+        bottomPadding:CGFloat = 2
     ) -> some View {
-        self.modifier(YAxisLabels(chartData: chartData, specifier: specifier, formatter: formatter, colourIndicator: colourIndicator))
+        self.modifier(YAxisLabels(chartData: chartData, specifier: specifier, formatter: formatter, colourIndicator: colourIndicator,trailingPadding: trailingPadding,bottomPadding: bottomPadding))
     }
 }

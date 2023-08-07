@@ -13,9 +13,11 @@ import SwiftUI
 internal struct XAxisLabels<T>: ViewModifier where T: CTLineBarChartDataProtocol {
     
     @ObservedObject private var chartData: T
+    private let topPadding: CGFloat
     
-    internal init(chartData: T) {
+    internal init(chartData: T,topPadding:CGFloat) {
         self.chartData = chartData
+        self.topPadding = topPadding
     }
     
     internal func body(content: Content) -> some View {
@@ -25,7 +27,7 @@ internal struct XAxisLabels<T>: ViewModifier where T: CTLineBarChartDataProtocol
                 if chartData.isGreaterThanTwo() {
                     VStack {
                         content
-                        chartData.getXAxisLabels().padding(.top, 2)
+                        chartData.getXAxisLabels().padding(.top, topPadding)
                         chartData.getXAxisTitle()
                     }
                 } else { content }
@@ -75,7 +77,7 @@ extension View {
      - Parameter chartData: Chart data model.
      - Returns: A  new view containing the chart with labels marking the x axis.
      */
-    public func xAxisLabels<T: CTLineBarChartDataProtocol>(chartData: T) -> some View {
-        self.modifier(XAxisLabels(chartData: chartData))
+    public func xAxisLabels<T: CTLineBarChartDataProtocol>(chartData: T,topPadding:CGFloat = 2) -> some View {
+        self.modifier(XAxisLabels(chartData: chartData,topPadding: topPadding))
     }
 }
