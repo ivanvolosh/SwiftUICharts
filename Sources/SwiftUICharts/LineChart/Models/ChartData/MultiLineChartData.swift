@@ -137,7 +137,7 @@ public final class MultiLineChartData: CTLineChartDataProtocol, GetDataProtocol,
                           isFilled: false,
                           disableAnimation: self.disableAnimation)
         }
-        .padding(.top,-20) //MARK: Change if needed 
+//        .padding(.top,-20) //MARK: Change if needed
     }
     
     public final func getTouchInteraction(touchLocation: CGPoint, chartSize: CGRect) -> some View {
